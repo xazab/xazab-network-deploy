@@ -4,7 +4,7 @@ set -ea
 
 . ./lib/cli/utils.sh
 
-CMD_USAGE="Show Dash Network services logs
+CMD_USAGE="Show Xazab Network services logs
 
 Usage: logs <network_name> <host> [docker logs options] <service_name>"
 

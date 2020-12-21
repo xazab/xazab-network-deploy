@@ -3,7 +3,7 @@
 # Requires "masternode_names" variable
 
 - name: import masternode owner private key
-  command: 'dash-cli {{ masternode_wallet_rpc_args }} importprivkey {{ masternodes[item].owner.private_key }}'
+  command: 'xazab-cli {{ masternode_wallet_rpc_args }} importprivkey {{ masternodes[item].owner.private_key }}'
   with_items: '{{ masternode_names }}'
 
 # fund
@@ -40,7 +40,7 @@
 # verify
 
 - name: get list of ProTx transactions from the wallet
-  command: dash-cli protx list wallet true
+  command: xazab-cli protx list wallet true
   register: get_protx_list_result
 
 - set_fact:

@@ -9,7 +9,7 @@
       - devnet
 
 - include: regtest_generate.yml
-  when: dash_network in generate_networks
+  when: xazab_network in generate_networks
 
 - include: wait_for_blocks.yml
-  when: dash_network not in generate_networks
+  when: xazab_network not in generate_networks

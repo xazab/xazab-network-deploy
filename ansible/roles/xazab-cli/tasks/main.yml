@@ -1,0 +1,7 @@
+---
+
+- name: pull xazabd image
+  shell: docker pull {{ xazabd_evo_image if evo_services else xazabd_image }}
+
+- name: copy xazab-cli from docker container
+  shell: docker run --rm -v /tmp:/host-tmp {{ xazabd_evo_image if evo_services else xazabd_image }} cp /usr/local/bin/xazab-cli /host-tmp/ && mv /tmp/xazab-cli /usr/local/bin/xazab-cli

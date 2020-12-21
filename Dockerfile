@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
-LABEL maintainer="Dash Developers <dev@dash.org>"
-LABEL description="Dash Network Deployment Tool"
+LABEL maintainer="Xazab Developers <dev@xazab.xyz>"
+LABEL description="Xazab Network Deployment Tool"
 
 # Install build utils
 
@@ -42,9 +42,9 @@ RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${
     -C /usr/local/bin docker/docker \
     && rm docker-${DOCKERVERSION}.tgz
 
-# Copy dash-cli form dashd image
+# Copy xazab-cli form xazabd image
 
-COPY --from=dashpay/dashd:latest /usr/local/bin/dash-cli /usr/local/bin
+COPY --from=xazab/xazabd:latest /usr/local/bin/xazab-cli /usr/local/bin
 
 # Copy sources
 

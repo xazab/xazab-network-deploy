@@ -3,7 +3,7 @@
 # Requires "masternode_names" variable
 
 - name: import masternode collateral private key
-  command: 'dash-cli {{ masternode_wallet_rpc_args }} importprivkey {{ masternodes[item].collateral.private_key }}'
+  command: 'xazab-cli {{ masternode_wallet_rpc_args }} importprivkey {{ masternodes[item].collateral.private_key }}'
   with_items: '{{ masternode_names }}'
 
 # check

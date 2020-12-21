@@ -10,10 +10,10 @@ rpcargs = sys.argv[1]
 mn_address = sys.argv[2]
 find_protx = sys.argv[3] == 'True'
 
-blockchaininfo_s = subprocess.run("dash-cli %s getblockchaininfo" % (rpcargs), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
-unspent_s = subprocess.run("dash-cli %s listunspent 0 9999999 \'[\"%s\"]\'" % (rpcargs, mn_address), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
-addressutxos_s = subprocess.run("dash-cli %s getaddressutxos \'{\"addresses\":[\"%s\"]}\'" % (rpcargs, mn_address), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
-protxs_s = subprocess.run("dash-cli %s protx list wallet 1" % (rpcargs), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
+blockchaininfo_s = subprocess.run("xazab-cli %s getblockchaininfo" % (rpcargs), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
+unspent_s = subprocess.run("xazab-cli %s listunspent 0 9999999 \'[\"%s\"]\'" % (rpcargs, mn_address), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
+addressutxos_s = subprocess.run("xazab-cli %s getaddressutxos \'{\"addresses\":[\"%s\"]}\'" % (rpcargs, mn_address), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
+protxs_s = subprocess.run("xazab-cli %s protx list wallet 1" % (rpcargs), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
 
 # print("blockchaininfo_s: %s" % blockchaininfo_s, file=sys.stderr)
 # print("unspent_s: %s" % unspent_s, file=sys.stderr)
@@ -67,7 +67,7 @@ for u in utxos:
         continue
 
     if find_protx:
-        rawtx_s = subprocess.run("dash-cli %s getrawtransaction %s 1" % (rpcargs, txid), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
+        rawtx_s = subprocess.run("xazab-cli %s getrawtransaction %s 1" % (rpcargs, txid), shell=True, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
         rawtx = json.loads(rawtx_s)
         #print("getrawtransaction: %s" % rawtx, file=sys.stderr)
         if rawtx['version'] < 3 or rawtx['type'] != 1:

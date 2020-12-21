@@ -30,9 +30,9 @@ describe('Tendermint', () => {
 
         expect(error).to.be.undefined();
 
-        let networkName = `dash-${network.name}`;
-        if (network.type === 'devnet' && variables.dash_devnet_version !== 1) {
-          networkName += `-${variables.dash_devnet_version}`;
+        let networkName = `xazab-${network.name}`;
+        if (network.type === 'devnet' && variables.xazab_devnet_version !== 1) {
+          networkName += `-${variables.xazab_devnet_version}`;
         }
 
         expect(nodeInfo).to.deep.include({

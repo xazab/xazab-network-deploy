@@ -1,0 +1,16 @@
+---
+
+xazabd_debug: 0
+
+xazabd_indexes: false
+xazabd_zmq: false
+
+xazabd_listen: false
+xazabd_externalip: '{{ public_ip }}'
+xazabd_isseednode: '{{ xazabd_externalip == xazabd_seednode }}'
+
+xazabd_private_net_prefix: 16
+xazabd_private_cidr: '{{ private_ip|ipsubnet(xazabd_private_net_prefix) }}'
+
+# When running devnet/regtest in local networks, we have to allow RFC1918/private addresses
+xazabd_allowprivatenet: '{% if xazabd_externalip|ipaddr("private") == xazabd_externalip %}1{% else %}0{% endif %}'

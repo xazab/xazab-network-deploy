@@ -1,0 +1,10 @@
+[Unit]
+After=network.target
+
+[Service]
+User={{ xazabd_user }}
+Group={{ xazabd_group }}
+ExecStart=/usr/local/bin/xazabd-generate-miner.sh
+
+[Install]
+WantedBy=default.target

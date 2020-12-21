@@ -40,10 +40,10 @@ $config = array(
         "donation_address" => getenv("MULTIFAUCET_DONATION_ADDRESS"), // donation address to display
 
         // Faucet look and feel:
-        "title" => "Dash Faucet", // page title, may be used by the template too
-        "sitename" => "Dash Faucet", // page title, may be used by the template too
-        "sitedesc" => "Dash", // page title, may be used by the template too
-        "coin_code" => "DASH",
+        "title" => "Xazab Faucet", // page title, may be used by the template too
+        "sitename" => "Xazab Faucet", // page title, may be used by the template too
+        "sitedesc" => "Xazab", // page title, may be used by the template too
+        "coin_code" => "XAZAB",
         "template" => "default", // template to use (see the templates directory)
         "lang" => "en",
 );

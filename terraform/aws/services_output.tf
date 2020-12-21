@@ -12,7 +12,7 @@ data "template_file" "service_core_p2p" {
 
   vars = {
     name = "Core P2P"
-    port = var.dashd_port
+    port = var.xazabd_port
   }
 }
 
@@ -21,7 +21,7 @@ data "template_file" "service_core_rpc" {
 
   vars = {
     name = "Core RPC"
-    port = var.dashd_rpc_port
+    port = var.xazabd_rpc_port
   }
 }
 
@@ -30,7 +30,7 @@ data "template_file" "service_core_zmq" {
 
   vars = {
     name = "Core ZMQ"
-    port = var.dashd_zmq_port
+    port = var.xazabd_zmq_port
   }
 }
 
@@ -140,7 +140,7 @@ data "template_file" "masternodes" {
       join(
         "\n",
         [
-          "   - dashd",
+          "   - xazabd",
           "   - dapi_api",
           "   - dapi_tx_filter_stream",
           "   - dapi_nginx",
@@ -157,11 +157,11 @@ data "template_file" "masternodes" {
 }
 
 data "template_file" "wallets" {
-  count    = length(aws_instance.dashd_wallet)
+  count    = length(aws_instance.xazabd_wallet)
   template = file("${path.module}/templates/services/node.tpl")
 
   vars = {
-    name = "dashd-wallet-${count.index + 1}"
+    name = "xazabd-wallet-${count.index + 1}"
     external_services = replace(
       chomp(join("", [data.template_file.service_ssh.rendered])),
       "{{ip}}",
@@ -182,12 +182,12 @@ data "template_file" "wallets" {
       "{{ip}}",
       element(aws_instance.masternode.*.public_ip, count.index),
     )
-    service_logs = chomp(join("\n", ["   - dashd"]))
+    service_logs = chomp(join("\n", ["   - xazabd"]))
   }
 }
 
 data "template_file" "full_nodes" {
-  count    = length(aws_instance.dashd_full_node)
+  count    = length(aws_instance.xazabd_full_node)
   template = file("${path.module}/templates/services/node.tpl")
 
   vars = {
@@ -219,7 +219,7 @@ data "template_file" "full_nodes" {
       "{{ip}}",
       element(aws_instance.masternode.*.public_ip, count.index),
     )
-    service_logs = chomp(join("\n", ["   - dashd"]))
+    service_logs = chomp(join("\n", ["   - xazabd"]))
   }
 }
 
@@ -248,7 +248,7 @@ data "template_file" "miners" {
       "{{ip}}",
       element(aws_instance.masternode.*.public_ip, count.index),
     )
-    service_logs = chomp(join("\n", ["   - dashd"]))
+    service_logs = chomp(join("\n", ["   - xazabd"]))
   }
 }
 

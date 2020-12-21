@@ -6,7 +6,7 @@ set -ea
 
 ansible_playbook="deploy.yml"
 
-CMD_USAGE="Deploy Dash Network
+CMD_USAGE="Deploy Xazab Network
 
 Usage: deploy [options] <network_name>
 
@@ -56,7 +56,7 @@ else
     echo "Skipping Terraform infrastructure deployment"
 fi
 
-# Install software and configure dash network using Ansible
+# Install software and configure xazab network using Ansible
 
 if [ -z ${ONLY_INFRASTRUCTURE} ]; then
     ansible_run_playbook "$ansible_playbook"

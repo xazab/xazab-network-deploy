@@ -16,9 +16,9 @@ function ansible_run_playbook() {
     ansible-playbook --private-key="$PRIVATE_KEY_PATH" \
                      -i "../$INVENTORY_FILE" \
                      -e "@../$ANSIBLE_CONFIG_PATH" \
-                     -e "dash_network_name=$NETWORK_NAME" \
-                     -e "dash_network=$NETWORK" \
-                     -e "dash_devnet_name=$NETWORK_DEVNET_NAME" \
+                     -e "xazab_network_name=$NETWORK_NAME" \
+                     -e "xazab_network=$NETWORK" \
+                     -e "xazab_devnet_name=$NETWORK_DEVNET_NAME" \
                      ${ANSIBLE_ARGS} \
                      "$1"
 

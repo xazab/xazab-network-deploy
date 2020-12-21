@@ -41,20 +41,20 @@ describe('Core', () => {
     for (const hostName of allHosts) {
       // eslint-disable-next-line no-loop-func
       describe(hostName, () => {
-        let dashdClient;
+        let xazabdClient;
 
         beforeEach(() => {
-          dashdClient = createRpcClientFromConfig(hostName);
+          xazabdClient = createRpcClientFromConfig(hostName);
         });
 
         it('should have correct network type', async function it() {
           this.slow(2000);
 
-          const { result: { networkactive, subversion } } = await dashdClient.getNetworkInfo();
+          const { result: { networkactive, subversion } } = await xazabdClient.getNetworkInfo();
 
           let networkName = network.name;
-          if (network.type === 'devnet' && variables.dash_devnet_version !== 1) {
-            networkName += `-${variables.dash_devnet_version}`;
+          if (network.type === 'devnet' && variables.xazab_devnet_version !== 1) {
+            networkName += `-${variables.xazab_devnet_version}`;
           }
 
           expect(networkactive).to.be.equal(true);

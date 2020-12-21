@@ -20,64 +20,64 @@ openvpn_enabled: true
 sentinel_image: ablock/sentinel
 
 # Drive
-drive_image: dashpay/drive
+drive_image: xazab/drive
 drive_logging_level: info
 
 # Tendermint
-tendermint_image: dashpay/tendermint
+tendermint_image: xazab/tendermint
 tendermint_p2p_port: 26656
 tendermint_rpc_port: 26657
 tendermint_uid: '100'
 tendermint_gid: '1000'
 
 # DAPI
-dapi_image: dashpay/dapi
+dapi_image: xazab/dapi
 dapi_envoy_image: envoyproxy/envoy
 dapi_port: 3000
 dapi_grpc_port: 3010
 
 # Insight
-insight_image: dashpay/insight
-insight_api_image: dashpay/insight-api
+insight_image: xazab/insight
+insight_api_image: xazab/insight-api
 insight_port: 3001
 
-# DashCore Docker image
-dashd_image: dashpay/dashd
-dashd_evo_image: dashpay/dashd:evo-latest
+# XazabCore Docker image
+xazabd_image: xazab/xazabd
+xazabd_evo_image: xazab/xazabd:evo-latest
 
-dashd_user: dash
-dashd_group: dash
-dashd_home: /dash
+xazabd_user: xazab
+xazabd_group: xazab
+xazabd_home: /xazab
 
-# dash_network:
-# dash_devnet_name:
-# dash_network_name:
-dash_devnet_version: 1
+# xazab_network:
+# xazab_devnet_name:
+# xazab_network_name:
+xazab_devnet_version: 1
 
-dashd_port: 20001
+xazabd_port: 20001
 
-# DashCore RPC settings
-dashd_rpc_allow_public: false
-dashd_rpc_user: dashrpc
-dashd_rpc_password: password
-dashd_rpc_port: 20002
+# XazabCore RPC settings
+xazabd_rpc_allow_public: false
+xazabd_rpc_user: xazabrpc
+xazabd_rpc_password: password
+xazabd_rpc_port: 20002
 
-dashd_zmq_port: 29998
+xazabd_zmq_port: 29998
 
 # Example sport address/privkey. Please provide your own spork key in network config:
-# dashd_sporkaddr: yMtULrhoxd8vRZrsnFobWgRTidtjg2Rnjm
-# dashd_sporkkey: cRsR7ywG6bhb5JsnpeRJ4c1fACabmYtK6WUVPiGG3GG4a5iYk6iL
+# xazabd_sporkaddr: yMtULrhoxd8vRZrsnFobWgRTidtjg2Rnjm
+# xazabd_sporkkey: cRsR7ywG6bhb5JsnpeRJ4c1fACabmYtK6WUVPiGG3GG4a5iYk6iL
 
 # You can provide your own seed node in network config. May be useful if you want to connect to another network
-dashd_seednode: '{{ hostvars[groups.seed_node[0]]["public_ip"] }}'
+xazabd_seednode: '{{ hostvars[groups.seed_node[0]]["public_ip"] }}'
 
 
 # Faucet stuff
 
 faucet_rpc_host: '{{ hostvars[groups.faucet_wallet[0]]["private_ip"] }}'
-faucet_rpc_port: '{{ dashd_rpc_port }}'
-faucet_rpc_user: '{{ dashd_rpc_user }}'
-faucet_rpc_password: '{{ dashd_rpc_password }}'
+faucet_rpc_port: '{{ xazabd_rpc_port }}'
+faucet_rpc_user: '{{ xazabd_rpc_user }}'
+faucet_rpc_password: '{{ xazabd_rpc_password }}'
 faucet_rpc_args: '-rpcconnect={{ faucet_rpc_host }} -rpcport={{ faucet_rpc_port }} -rpcuser={{ faucet_rpc_user }} -rpcpassword={{ faucet_rpc_password }}'
 faucet_minimum_payout: 10
 faucet_maximum_payout: 10
@@ -103,9 +103,9 @@ miner_cpu_quota: 100000 # 100%
 # Masternode stuff
 
 masternode_wallet_rpc_host: '{{ hostvars[groups.masternode_wallet[0]]["private_ip"] }}'
-masternode_wallet_rpc_port: '{{ dashd_rpc_port }}'
-masternode_wallet_rpc_user: '{{ dashd_rpc_user }}'
-masternode_wallet_rpc_password: '{{ dashd_rpc_password }}'
+masternode_wallet_rpc_port: '{{ xazabd_rpc_port }}'
+masternode_wallet_rpc_user: '{{ xazabd_rpc_user }}'
+masternode_wallet_rpc_password: '{{ xazabd_rpc_password }}'
 masternode_wallet_rpc_args: '-rpcconnect={{ masternode_wallet_rpc_host }} -rpcport={{ masternode_wallet_rpc_port }} -rpcuser={{ masternode_wallet_rpc_user }} -rpcpassword={{ masternode_wallet_rpc_password }}'
 
 # Disk space allocated for swap file on each host

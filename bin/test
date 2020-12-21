@@ -4,7 +4,7 @@ set -ea
 
 . ./lib/cli/utils.sh
 
-CMD_USAGE="Test Dash Network
+CMD_USAGE="Test Xazab Network
 
 Usage: test [options] <network_name>
 

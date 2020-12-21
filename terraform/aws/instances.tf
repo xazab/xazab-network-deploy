@@ -22,13 +22,13 @@ resource "aws_instance" "web" {
   volume_tags = {
     Name        = "dn-${terraform.workspace}-web-${count.index + 1}"
     Hostname    = "web-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   tags = {
     Name        = "dn-${terraform.workspace}-web-${count.index + 1}"
     Hostname    = "web-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   lifecycle {
@@ -37,8 +37,8 @@ resource "aws_instance" "web" {
 
 }
 
-# dashd wallet nodes (for faucet and masternode collaterals)
-resource "aws_instance" "dashd_wallet" {
+# xazabd wallet nodes (for faucet and masternode collaterals)
+resource "aws_instance" "xazabd_wallet" {
   count = var.wallet_count
 
   ami                  = data.aws_ami.ubuntu.id
@@ -48,21 +48,21 @@ resource "aws_instance" "dashd_wallet" {
 
   vpc_security_group_ids = [
     aws_security_group.default.id,
-    aws_security_group.dashd_private.id,
+    aws_security_group.xazabd_private.id,
   ]
 
   subnet_id = element(aws_subnet.public.*.id, count.index)
 
   volume_tags = {
-    Name        = "dn-${terraform.workspace}-dashd-wallet-${count.index + 1}"
-    Hostname    = "dashd-wallet-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    Name        = "dn-${terraform.workspace}-xazabd-wallet-${count.index + 1}"
+    Hostname    = "xazabd-wallet-${count.index + 1}"
+    XazabNetwork = terraform.workspace
   }
 
   tags = {
-    Name        = "dn-${terraform.workspace}-dashd-wallet-${count.index + 1}"
-    Hostname    = "dashd-wallet-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    Name        = "dn-${terraform.workspace}-xazabd-wallet-${count.index + 1}"
+    Hostname    = "xazabd-wallet-${count.index + 1}"
+    XazabNetwork = terraform.workspace
   }
 
   lifecycle {
@@ -71,8 +71,8 @@ resource "aws_instance" "dashd_wallet" {
 
 }
 
-# dashd full nodes
-resource "aws_instance" "dashd_full_node" {
+# xazabd full nodes
+resource "aws_instance" "xazabd_full_node" {
   count = var.node_count
 
   ami                  = data.aws_ami.ubuntu.id
@@ -82,7 +82,7 @@ resource "aws_instance" "dashd_full_node" {
 
   vpc_security_group_ids = [
     aws_security_group.default.id,
-    aws_security_group.dashd_public.id,
+    aws_security_group.xazabd_public.id,
   ]
 
   subnet_id = element(aws_subnet.public.*.id, count.index)
@@ -90,13 +90,13 @@ resource "aws_instance" "dashd_full_node" {
   volume_tags = {
     Name        = "dn-${terraform.workspace}-node-${count.index + 1}"
     Hostname    = "node-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   tags = {
     Name        = "dn-${terraform.workspace}-node-${count.index + 1}"
     Hostname    = "node-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   lifecycle {
@@ -116,7 +116,7 @@ resource "aws_instance" "miner" {
 
   vpc_security_group_ids = [
     aws_security_group.default.id,
-    aws_security_group.dashd_private.id,
+    aws_security_group.xazabd_private.id,
   ]
 
   subnet_id = element(aws_subnet.public.*.id, count.index)
@@ -124,13 +124,13 @@ resource "aws_instance" "miner" {
   volume_tags = {
     Name        = "dn-${terraform.workspace}-miner-${count.index + 1}"
     Hostname    = "miner-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   tags = {
     Name        = "dn-${terraform.workspace}-miner-${count.index + 1}"
     Hostname    = "miner-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   lifecycle {
@@ -150,7 +150,7 @@ resource "aws_instance" "masternode" {
 
   vpc_security_group_ids = [
     aws_security_group.default.id,
-    aws_security_group.dashd_public.id,
+    aws_security_group.xazabd_public.id,
     aws_security_group.masternode.id,
   ]
 
@@ -163,13 +163,13 @@ resource "aws_instance" "masternode" {
   volume_tags = {
     Name        = "dn-${terraform.workspace}-masternode-${count.index + 1}"
     Hostname    = "masternode-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   tags = {
     Name        = "dn-${terraform.workspace}-masternode-${count.index + 1}"
     Hostname    = "masternode-${count.index + 1}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   lifecycle {
@@ -195,13 +195,13 @@ resource "aws_instance" "vpn" {
   volume_tags = {
     Name        = "dh-${terraform.workspace}-vpn"
     Hostname    = "vpn"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   tags = {
     Name        = "dh-${terraform.workspace}-vpn"
     Hostname    = "vpn"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 
   lifecycle {

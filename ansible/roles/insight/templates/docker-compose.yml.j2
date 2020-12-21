@@ -8,9 +8,9 @@ services:
     ports:
       - 3002:{{ insight_port }}
     volumes:
-      - {{ insight_path }}/dashcore-node.json:/insight/dashcore-node.json
+      - {{ insight_path }}/xazabcore-node.json:/insight/xazabcore-node.json
 
-  # in order to support obsolete URL path (/insight-api-dash)
+  # in order to support obsolete URL path (/insight-api-xazab)
   insight_proxy:
     image: nginx:latest
     container_name: insight_proxy

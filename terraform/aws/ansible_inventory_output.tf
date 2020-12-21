@@ -11,26 +11,26 @@ data "template_file" "web_hosts" {
 }
 
 data "template_file" "wallet_node_hosts" {
-  count    = length(aws_instance.dashd_wallet)
+  count    = length(aws_instance.xazabd_wallet)
   template = file("${path.module}/templates/inventory/hostname.tpl")
 
   vars = {
     index      = count.index + 1
-    name       = element(aws_instance.dashd_wallet.*.tags.Hostname, count.index)
-    public_ip  = element(aws_instance.dashd_wallet.*.public_ip, count.index)
-    private_ip = element(aws_instance.dashd_wallet.*.private_ip, count.index)
+    name       = element(aws_instance.xazabd_wallet.*.tags.Hostname, count.index)
+    public_ip  = element(aws_instance.xazabd_wallet.*.public_ip, count.index)
+    private_ip = element(aws_instance.xazabd_wallet.*.private_ip, count.index)
   }
 }
 
 data "template_file" "full_node_hosts" {
-  count    = length(aws_instance.dashd_full_node)
+  count    = length(aws_instance.xazabd_full_node)
   template = file("${path.module}/templates/inventory/hostname.tpl")
 
   vars = {
     index      = count.index + 1
-    name       = element(aws_instance.dashd_full_node.*.tags.Hostname, count.index)
-    public_ip  = element(aws_instance.dashd_full_node.*.public_ip, count.index)
-    private_ip = element(aws_instance.dashd_full_node.*.private_ip, count.index)
+    name       = element(aws_instance.xazabd_full_node.*.tags.Hostname, count.index)
+    public_ip  = element(aws_instance.xazabd_full_node.*.public_ip, count.index)
+    private_ip = element(aws_instance.xazabd_full_node.*.private_ip, count.index)
   }
 }
 
@@ -86,8 +86,8 @@ data "template_file" "ansible_inventory" {
       ),
     )
     web_hosts         = join("\n", concat(aws_instance.web.*.tags.Hostname))
-    wallet_node_hosts = join("\n", concat(aws_instance.dashd_wallet.*.tags.Hostname))
-    full_node_hosts   = join("\n", concat(aws_instance.dashd_full_node.*.tags.Hostname))
+    wallet_node_hosts = join("\n", concat(aws_instance.xazabd_wallet.*.tags.Hostname))
+    full_node_hosts   = join("\n", concat(aws_instance.xazabd_full_node.*.tags.Hostname))
     miner_hosts       = join("\n", concat(aws_instance.miner.*.tags.Hostname))
     masternode_hosts  = join("\n", concat(aws_instance.masternode.*.tags.Hostname))
   }

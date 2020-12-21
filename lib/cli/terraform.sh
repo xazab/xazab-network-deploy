@@ -35,7 +35,7 @@ function terraform_run_command() {
 
     terraform_init
 
-    # Select/create terraform workspace according to dash network name
+    # Select/create terraform workspace according to xazab network name
 
     terraform_select_workspace "$NETWORK_NAME"
 

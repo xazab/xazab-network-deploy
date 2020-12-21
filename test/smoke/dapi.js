@@ -1,7 +1,7 @@
 const grpc = require('grpc');
 const { promisify } = require('util');
 
-const DAPIClient = require('@dashevo/dapi-client');
+const DAPIClient = require('@xazab/dapi-client');
 
 const { Client: HealthCheckClient } = require('grpc-health-check/health');
 const {

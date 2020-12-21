@@ -42,34 +42,34 @@ resource "aws_security_group" "default" {
 
   tags = {
     Name        = "dn-${terraform.workspace}-default"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 }
 
-# dashd nodes not accessible from the public internet
-resource "aws_security_group" "dashd_private" {
-  name        = "${terraform.workspace}-dashd-private"
-  description = "dashd private node"
+# xazabd nodes not accessible from the public internet
+resource "aws_security_group" "xazabd_private" {
+  name        = "${terraform.workspace}-xazabd-private"
+  description = "xazabd private node"
   vpc_id      = aws_vpc.default.id
 
-  # Dash Core access
+  # Xazab Core access
   ingress {
-    from_port   = var.dashd_port
-    to_port     = var.dashd_port
+    from_port   = var.xazabd_port
+    to_port     = var.xazabd_port
     protocol    = "tcp"
-    description = "DashCore P2P"
+    description = "XazabCore P2P"
 
     cidr_blocks = flatten([
       aws_subnet.public.*.cidr_block,
     ])
   }
 
-  # DashCore RPC access
+  # XazabCore RPC access
   ingress {
-    from_port   = var.dashd_rpc_port
-    to_port     = var.dashd_rpc_port
+    from_port   = var.xazabd_rpc_port
+    to_port     = var.xazabd_rpc_port
     protocol    = "tcp"
-    description = "DashCore RPC"
+    description = "XazabCore RPC"
 
     cidr_blocks = flatten([
       aws_subnet.public.*.cidr_block,
@@ -77,12 +77,12 @@ resource "aws_security_group" "dashd_private" {
     ])
   }
 
-  # DashCore ZMQ acess
+  # XazabCore ZMQ acess
   ingress {
-    from_port   = var.dashd_zmq_port
-    to_port     = var.dashd_zmq_port
+    from_port   = var.xazabd_zmq_port
+    to_port     = var.xazabd_zmq_port
     protocol    = "tcp"
-    description = "DashCore ZMQ"
+    description = "XazabCore ZMQ"
 
     cidr_blocks = flatten([
       aws_subnet.public.*.cidr_block,
@@ -91,35 +91,35 @@ resource "aws_security_group" "dashd_private" {
   }
 
   tags = {
-    Name        = "dn-${terraform.workspace}-dashd-private"
-    DashNetwork = terraform.workspace
+    Name        = "dn-${terraform.workspace}-xazabd-private"
+    XazabNetwork = terraform.workspace
   }
 }
 
-# dashd node accessible from the public internet
-resource "aws_security_group" "dashd_public" {
-  name        = "${terraform.workspace}-dashd-public"
-  description = "dashd public network"
+# xazabd node accessible from the public internet
+resource "aws_security_group" "xazabd_public" {
+  name        = "${terraform.workspace}-xazabd-public"
+  description = "xazabd public network"
   vpc_id      = aws_vpc.default.id
 
-  # Dash Core access
+  # Xazab Core access
   ingress {
-    from_port   = var.dashd_port
-    to_port     = var.dashd_port
+    from_port   = var.xazabd_port
+    to_port     = var.xazabd_port
     protocol    = "tcp"
-    description = "DashCore P2P"
+    description = "XazabCore P2P"
 
     cidr_blocks = [
       "0.0.0.0/0",
     ]
   }
 
-  # DashCore RPC access
+  # XazabCore RPC access
   ingress {
-    from_port   = var.dashd_rpc_port
-    to_port     = var.dashd_rpc_port
+    from_port   = var.xazabd_rpc_port
+    to_port     = var.xazabd_rpc_port
     protocol    = "tcp"
-    description = "DashCore RPC"
+    description = "XazabCore RPC"
 
     cidr_blocks = flatten([
       aws_subnet.public.*.cidr_block,
@@ -127,12 +127,12 @@ resource "aws_security_group" "dashd_public" {
     ])
   }
 
-  # DashCore ZMQ acess
+  # XazabCore ZMQ acess
   ingress {
-    from_port   = var.dashd_zmq_port
-    to_port     = var.dashd_zmq_port
+    from_port   = var.xazabd_zmq_port
+    to_port     = var.xazabd_zmq_port
     protocol    = "tcp"
-    description = "DashCore ZMQ"
+    description = "XazabCore ZMQ"
 
     cidr_blocks = flatten([
       aws_subnet.public.*.cidr_block,
@@ -141,8 +141,8 @@ resource "aws_security_group" "dashd_public" {
   }
 
   tags = {
-    Name        = "dn-${terraform.workspace}-dashd-public"
-    DashNetwork = terraform.workspace
+    Name        = "dn-${terraform.workspace}-xazabd-public"
+    XazabNetwork = terraform.workspace
   }
 }
 
@@ -177,11 +177,11 @@ resource "aws_security_group" "http" {
 
   tags = {
     Name        = "dn-${terraform.workspace}-http"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 }
 
-# dashd node accessible from the public internet
+# xazabd node accessible from the public internet
 resource "aws_security_group" "masternode" {
   name        = "${terraform.workspace}-masternode"
   description = "masternode"
@@ -276,7 +276,7 @@ resource "aws_security_group" "masternode" {
 
   tags = {
     Name        = "dn-${terraform.workspace}-masternode"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 }
 
@@ -322,7 +322,7 @@ resource "aws_security_group" "elb" {
 
   tags = {
     Name        = "dn-${terraform.workspace}-elb"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 }
 
@@ -371,6 +371,6 @@ resource "aws_security_group" "vpn" {
 
   tags = {
     Name        = "dn-${terraform.workspace}-vpn"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 }

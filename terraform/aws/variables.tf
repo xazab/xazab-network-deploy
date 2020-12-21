@@ -1,18 +1,18 @@
 variable "public_key_path" {
 }
 
-variable "dashd_port" {
-  description = "Port for Dash Core nodes"
+variable "xazabd_port" {
+  description = "Port for Xazab Core nodes"
   default     = 20001
 }
 
-variable "dashd_rpc_port" {
-  description = "Port for Dash RPC interface"
+variable "xazabd_rpc_port" {
+  description = "Port for Xazab RPC interface"
   default     = 20002
 }
 
-variable "dashd_zmq_port" {
-  description = "Port for Dash Zmq interface"
+variable "xazabd_zmq_port" {
+  description = "Port for Xazab Zmq interface"
   default     = 29998
 }
 

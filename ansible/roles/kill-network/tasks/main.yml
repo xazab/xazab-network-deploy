@@ -7,9 +7,9 @@
     enabled: False
   failed_when: False
 
-- name: disable dashd-generate-miner
+- name: disable xazabd-generate-miner
   systemd:
-    name: 'dashd-generate-miner'
+    name: 'xazabd-generate-miner'
     state: stopped
     enabled: False
   failed_when: False
@@ -20,7 +20,7 @@
 - name: remove all docker data
   shell: docker system prune -a -f --volumes
 
-- name: delete dash home dir
+- name: delete xazab home dir
   file:
       state: absent
-      path: "{{ dashd_home }}/"
+      path: "{{ xazabd_home }}/"

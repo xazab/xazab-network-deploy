@@ -1,7 +1,7 @@
 ---
 
 - name: getblockchaininfo
-  command: dash-cli {{ faucet_rpc_args }} getblockchaininfo
+  command: xazab-cli {{ faucet_rpc_args }} getblockchaininfo
   when: num_blocks|int > 0
   register: getblockchaininfo_result
 
@@ -13,7 +13,7 @@
   when: num_blocks|int > 0
 
 - name: wait for {{ num_blocks }} blocks
-  command: dash-cli {{ faucet_rpc_args }} getblockchaininfo
+  command: xazab-cli {{ faucet_rpc_args }} getblockchaininfo
   when: num_blocks|int > 0
   register: getblockchaininfo_result
   until: (getblockchaininfo_result.stdout|from_json).blocks|int >= (initial_block_count|int + num_blocks|int)
@@ -21,7 +21,7 @@
   delay: 10
 
 - name: wait for enough blocks to have {{ balance_needed|default(0) }} coins
-  command: dash-cli {{ faucet_rpc_args }} getbalance
+  command: xazab-cli {{ faucet_rpc_args }} getbalance
   when: balance_needed|float > 0
   register: balance_result
   until: balance_result.stdout|float >= balance_needed|float

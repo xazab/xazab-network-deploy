@@ -1,0 +1,96 @@
+# general
+
+{% if xazab_network == 'regtest' %}
+regtest=1
+{% elif xazab_network == 'testnet' %}
+testnet=1
+{% elif xazab_network == 'devnet' %}
+devnet={{ xazab_devnet_name }}{{ '-' + xazab_devnet_version|string if xazab_devnet_version != 1 else '' }}
+{% endif %}
+
+daemon=0  # leave this set to 0 for Docker
+logtimestamps=1
+maxconnections=256
+debug={{ xazabd_debug }}
+printtoconsole=1
+
+{% if xazabd_indexes %}
+# optional indices (required for Insight)
+txindex=1
+addressindex=1
+timestampindex=1
+spentindex=1
+{% endif %}
+
+{% if xazabd_zmq %}
+# ZeroMQ notifications (required for Insight)
+zmqpubrawtx=tcp://0.0.0.0:{{ xazabd_zmq_port }}
+zmqpubrawtxlock=tcp://0.0.0.0:{{ xazabd_zmq_port }}
+zmqpubhashblock=tcp://0.0.0.0:{{ xazabd_zmq_port }}
+#zmqpubhashtx=tcp://0.0.0.0:{{ xazabd_zmq_port }}
+#zmqpubhashtxlock=tcp://0.0.0.0:{{ xazabd_zmq_port }}
+#zmqpubrawblock=tcp://0.0.0.0:{{ xazabd_zmq_port }}
+{% endif %}
+
+# JSONRPC
+server=1
+rpcuser={{ xazabd_rpc_user }}
+rpcpassword={{ xazabd_rpc_password }}
+
+{% if xazabd_rpc_allow_public %}
+rpcallowip=::/0
+rpcallowip=0.0.0.0/0
+{% else %}
+rpcallowip={{ xazabd_private_cidr }}
+rpcallowip=127.0.0.0
+rpcallowip=172.16.0.0/12
+rpcallowip=192.168.0.0/16
+rpcallowip={{ hostvars['vpn'].public_ip }}/32
+{% endif %}
+
+rpcworkqueue=64
+rpcthreads=16
+
+{% if xazabd_listen %}
+listen=1
+{% else %}
+listen=0
+{% endif %}
+
+externalip={{ xazabd_externalip }}
+
+dnsseed=0
+allowprivatenet={{ xazabd_allowprivatenet }}
+
+[{{ xazab_network }}]
+
+rpcport={{ xazabd_rpc_port }}
+
+{% if masternode is defined %}
+masternodeblsprivkey={{ masternode.operator.private_key }}
+{% endif %}
+
+# external network
+{% if xazabd_listen %}
+bind=0.0.0.0
+{% endif %}
+
+port={{ xazabd_port }}
+
+{% if xazabd_seednode is not none and not xazabd_isseednode %}
+addnode={{ xazabd_seednode }}:{{ xazabd_port }}
+{% endif %}
+
+{% if xazabd_sporkaddr is defined %}
+sporkaddr={{ xazabd_sporkaddr }}
+{% endif %}
+{% if xazabd_sporkkey is defined %}
+sporkkey={{ xazabd_sporkkey }}
+{% endif %}
+
+# First 1000 blocks should be mined with lowest difficulty (like in regtest, so it's instant)
+# and first 500 blocks are mined with a block subsidity multiplied by 10
+# this allows to register MNs immediately (DIP3 activates on block 2)
+minimumdifficultyblocks=1000
+highsubsidyblocks=500
+highsubsidyfactor=10

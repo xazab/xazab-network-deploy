@@ -20,7 +20,7 @@ if [[ "$PACKAGE_TAG" != "$TRAVIS_TAG" ]]; then
   exit 1
 fi
 
-IMAGE_NAME="dashpay/dash-network-deploy"
+IMAGE_NAME="xazab/xazab-network-deploy"
 
 # If prerelease is empty it is a stable release
 # so we add latest tag, otherwise a full version tag

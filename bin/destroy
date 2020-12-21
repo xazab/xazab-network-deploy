@@ -4,12 +4,12 @@ set -ea
 
 . ./lib/cli/utils.sh
 
-CMD_USAGE="Destroy Dash Network
+CMD_USAGE="Destroy Xazab Network
 
 Usage: destroy [options] <network_name>
 
 Options:
-  -k --keep-infrastructure - Destroy Dash Network and keep infrastructure
+  -k --keep-infrastructure - Destroy Xazab Network and keep infrastructure
   -h --help                - Show help"
 
 for i in "$@"

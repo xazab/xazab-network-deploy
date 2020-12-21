@@ -24,16 +24,16 @@ fi
 # Show help if command is not specified
 
 if [[ -z $1 ]]; then
-    echo "Dash Network Tool
+    echo "Xazab Network Tool
 
-Usage: dash-network <command>
+Usage: xazab-network <command>
 
 Commands:
   deploy    - Deploy or update new network
   destroy   - Destroy existent network
   test      - Run smoke test against specific network
   list      - List network hosts and services
-  dash-cli  - Execute DashCore RPC command
+  xazab-cli  - Execute XazabCore RPC command
   generate  - Generate configs
   logs      - Show specific network service logs"
   exit 0;
@@ -48,4 +48,4 @@ docker run -ti --rm \
            -v "$HOME/.aws:/root/.aws" \
            -v "$PUBLIC_KEY_PATH:$PUBLIC_KEY_PATH" \
            -v "$PRIVATE_KEY_PATH:$PRIVATE_KEY_PATH" \
-           dashpay/dash-network-deploy "$@"
+           xazab/xazab-network-deploy "$@"

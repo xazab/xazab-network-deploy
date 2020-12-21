@@ -9,7 +9,7 @@
     dest: '{{ insight_path }}/{{ item }}'
   loop:
     - docker-compose.yml
-    - dashcore-node.json
+    - xazabcore-node.json
     - insight-proxy-nginx.conf
     - .env
 

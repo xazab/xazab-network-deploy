@@ -23,4 +23,4 @@ deploy:
   script: bash scripts/travis-deploy.sh
   on:
     tags: true
-    repo: dashevo/dash-network-deploy
+    repo: xazab/xazab-network-deploy

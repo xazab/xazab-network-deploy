@@ -1,7 +1,7 @@
 /* eslint-disable no-loop-func */
-const DAPIClient = require('@dashevo/dapi-client');
+const DAPIClient = require('@xazab/dapi-client');
 
-const { Block } = require('@dashevo/dashcore-lib');
+const { Block } = require('@xazab/xazabcore-lib');
 
 // eslint-disable-next-line no-undef
 const { config: { testVariables: { inventory, variables } } } = __karma__;

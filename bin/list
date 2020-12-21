@@ -4,7 +4,7 @@ set -ea
 
 . ./lib/cli/utils.sh
 
-CMD_USAGE="List Dash Network services
+CMD_USAGE="List Xazab Network services
 
 Usage: list <network_name>"
 

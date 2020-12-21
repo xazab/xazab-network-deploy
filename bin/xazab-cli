@@ -4,9 +4,9 @@ set -ea
 
 . ./lib/cli/utils.sh
 
-CMD_USAGE="Execute dashd RPC commands
+CMD_USAGE="Execute xazabd RPC commands
 
-Usage: dash-cli <network_name> <host> <rpc-command> [arguments]"
+Usage: xazab-cli <network_name> <host> <rpc-command> [arguments]"
 
 for i in "$@"
 do
@@ -58,9 +58,9 @@ case ${NETWORK} in
 esac
 
 # TODO: Read RPC settings from network and default (group_vars/all) configurations
-dash-cli -rpcconnect="$ANSIBLE_HOST" \
+xazab-cli -rpcconnect="$ANSIBLE_HOST" \
          -rpcport=20002 \
-         -rpcuser=dashrpc \
+         -rpcuser=xazabrpc \
          -rpcpassword=password \
          ${NETWORK_ARG} \
          ${RPC_COMMAND}

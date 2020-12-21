@@ -19,7 +19,7 @@ ${masternode_hosts}
 node-1
 
 [faucet_wallet]
-dashd-wallet-1
+xazabd-wallet-1
 
 [masternode_wallet]
-dashd-wallet-2
+xazabd-wallet-2

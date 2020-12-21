@@ -64,38 +64,38 @@
       aws_scripts_mon_options: "--mem-util --disk-space-util --disk-path=/ --swap-util"
       aws_scripts_mon_use_iam: true
 
-# Configure dashd cli
+# Configure xazabd cli
 
 - hosts: all
   become: true
   roles:
-    - dash-cli
+    - xazab-cli
 
 # Setup wallets, miners and full nodes
 
 - hosts: wallet_nodes
   become: true
   roles:
-    - role: dashd
-      dashd_indexes: true
-      dashd_zmq: true
+    - role: xazabd
+      xazabd_indexes: true
+      xazabd_zmq: true
       tags:
-        - dashd
+        - xazabd
 
 - hosts: miners
   become: true
   roles:
-    - role: dashd
+    - role: xazabd
       tags:
-        - dashd
+        - xazabd
 
 - hosts: full_nodes
   become: true
   roles:
-    - role: dashd
-      dashd_listen: true
+    - role: xazabd
+      xazabd_listen: true
       tags:
-        - dashd
+        - xazabd
 
 # Setup masternodes
 
@@ -110,12 +110,12 @@
         msg: Masternode not defined in network config
       when: masternode is not defined
   roles:
-    - role: dashd
-      dashd_listen: true
-      dashd_zmq: true
-      dashd_indexes: true
+    - role: xazabd
+      xazabd_listen: true
+      xazabd_zmq: true
+      xazabd_indexes: true
       tags:
-        - dashd
+        - xazabd
     - mn-sentinel
     - role: insight
       ui: false
@@ -132,15 +132,15 @@
   become: true
   roles:
     - role: generate-firstblock
-      when: dash_network == "devnet" or dash_network == "regtest"
+      when: xazab_network == "devnet" or xazab_network == "regtest"
 
 # Mine blocks
 
 - hosts: miners
   become: true
   roles:
-    - role: dashd-generate-miner
-      when: dash_network != "mainnet"
+    - role: xazabd-generate-miner
+      when: xazab_network != "mainnet"
 
 # Setup faucet and insight
 
@@ -148,10 +148,10 @@
   become: true
   roles:
     - multifaucet
-    - role: dashd
-      dashd_indexes: true
-      dashd_zmq: true
-      dashd_listen: true
+    - role: xazabd
+      xazabd_indexes: true
+      xazabd_zmq: true
+      xazabd_listen: true
     - insight
   tags:
     - web
@@ -168,7 +168,7 @@
 - hosts: masternode_wallet
   become: true
   roles:
-    - activate-dashd-sporks
+    - activate-xazabd-sporks
 
 # Prune unused Docker images
 

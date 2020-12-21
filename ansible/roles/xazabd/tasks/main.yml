@@ -1,0 +1,60 @@
+---
+
+- name: Create xazabd group
+  group:
+    name: '{{ xazabd_group }}'
+
+- name: Create xazabd user
+  user:
+    name: '{{ xazabd_user }}'
+    group: '{{ xazabd_group }}'
+    append: False
+    home: '{{ xazabd_home }}'
+
+- name: get uid of xazab user
+  shell: id -u {{ xazabd_user }}
+  register: xazab_user_id
+- name: get gid of xazab user
+  shell: id -g {{ xazabd_user }}
+  register: xazab_group_id
+
+- name: create xazab home/data dir
+  file: path={{ xazabd_home }} state=directory mode='0750' owner='{{ xazabd_user }}' group='{{ xazabd_group }}'
+- name: create .xazabcore dir
+  file: path={{ xazabd_home }}/.xazabcore state=directory mode='0750' owner='{{ xazabd_user }}' group='{{ xazabd_group }}'
+- name: create .xazabcore dir for root
+  file: path=/root/.xazabcore state=directory mode='0750' owner='root' group='root'
+
+- name: Configure xazabd
+  template:
+    src: 'xazab.conf.j2'
+    dest: '{{ xazabd_home }}/.xazabcore/xazab.conf'
+    owner: '{{ xazabd_user }}'
+    group: '{{ xazabd_group }}'
+    mode: '0640'
+  register: xazab_config_state
+
+- name: copy configuration to root user dir to make rpc work
+  shell: cp {{ xazabd_home }}/.xazabcore/xazab.conf /root/.xazabcore/
+
+- name: create xazabd container
+  docker_container:
+    name: xazabd
+    state: started
+    restart: '{{ xazab_config_state is changed }}'
+    restart_policy: always
+    image: '{{ xazabd_evo_image if evo_services else xazabd_image }}'
+    pull: true
+    user: '{{ xazab_user_id.stdout }}:{{ xazab_group_id.stdout }}'
+    working_dir: '{{ xazabd_home }}'
+    volumes:
+    - '{{ xazabd_home }}:/xazab'
+    network_mode: host
+    command: 'xazabd -conf={{ xazabd_home }}/.xazabcore/xazab.conf -datadir={{ xazabd_home }}/.xazabcore'
+
+- name: wait for rpc to be available
+  shell: xazab-cli getblockchaininfo
+  register: task_result
+  until: task_result.rc == 0
+  retries: 5
+  delay: 10

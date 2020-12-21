@@ -43,7 +43,7 @@ resource "aws_vpc" "default" {
 
   tags = {
     Name        = "dn-${terraform.workspace}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 }
 
@@ -53,7 +53,7 @@ resource "aws_internet_gateway" "default" {
 
   tags = {
     Name        = "dn-${terraform.workspace}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 }
 
@@ -73,7 +73,7 @@ resource "aws_subnet" "public" {
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   tags = {
     Name        = "${terraform.workspace}-public${count.index}"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
     Tier        = "Public"
   }
 }
@@ -120,7 +120,7 @@ resource "aws_elb" "web" {
 
   tags = {
     Name        = "dn-${terraform.workspace}-web"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 }
 
@@ -185,7 +185,7 @@ resource "aws_eip" "vpn" {
 
   tags = {
     Name        = "dn-${terraform.workspace}-vpn"
-    DashNetwork = terraform.workspace
+    XazabNetwork = terraform.workspace
   }
 }
 
